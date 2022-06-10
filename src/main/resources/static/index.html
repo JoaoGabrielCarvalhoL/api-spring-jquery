@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+
+<title>Cadastro de Usuário</title>
+
+<style type="text/css">
+.container {
+	padding: 20px;
+	margin-top: 20px;
+}
+
+button {
+	margin: 5px;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1>Cadastro de Usuário</h1>
+
+		<form action="" id="formUser">
+
+			<div class="mb-3">
+				<label for="id" class="form-label">Id</label> <input type="text"
+					class="form-control" id="id" readonly="readonly">
+			</div>
+
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">Nome</label>
+				<input type="text" class="form-control" id="name"
+					placeholder="Informe o nome" required="required">
+			</div>
+
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">Email</label>
+				<input type="email" class="form-control" id="email"
+					placeholder="name@example.com">
+			</div>
+
+			<button type="button" class="btn btn-primary"
+				onclick="salvarUsuario()">Salvar</button>
+			<button type="button" class="btn btn-danger" onclick="limparCampos()">Cancelar</button>
+			<button type="button" class="btn btn-success"
+				onclick="limparCampos()">Novo Usuário</button>
+			<button type="button" class="btn btn-danger"
+				onclick="apagarUsuarioInicio()">Apagar</button>
+			<br>
+			<button type="button" class="btn btn-dark" data-bs-toggle="modal"
+				data-bs-target="#exampleModal">Pesquisar por Nome</button>
+			<button type="button" class="btn btn-dark" data-bs-toggle="modal"
+				data-bs-target="#exampleModal2">Pesquisar por Email</button>
+		</form>
+
+	</div>
+
+	<div class="container">
+
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Pesquisa de
+							Usuário</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="mb-3">
+								<label for="recipient-name" class="col-form-label">Nome:</label>
+								<input type="text" class="form-control" id="nome">
+							</div>
+							<button type="button" class="btn btn-success"
+								onclick="pesquisarUsuarioNome()">Pesquisar</button>
+						</form>
+
+						<div style="height: 300px; overflow: scroll;">
+							<table class="table" id="tabelaNome">
+								<thead>
+									<tr>
+										<th scope="col">Id</th>
+										<th scope="col">Nome</th>
+										<th scope="col">Email</th>
+										<th scope="col">Editar</th>
+										<th scope="col">Apagar</th>
+
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+		<div class="modal fade" id="exampleModal2" tabindex="-1"
+			aria-labelledby="exampleModalLabel2" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Pesquisa de
+							Usuário</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="mb-3">
+								<label for="recipient-name" class="col-form-label">Email:</label>
+								<input type="text" class="form-control" id="emailuser">
+							</div>
+							<button type="button" class="btn btn-success"
+								onclick="pesquisarUsuarioEmail()">Pesquisar</button>
+						</form>
+
+						<table class="table" id="tabelaEmail">
+							<thead>
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Nome</th>
+									<th scope="col">Email</th>
+									<th scope="col">Editar</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous">
+		
+	</script>
+
+	<script type="text/javascript">
+	
+		function salvarUsuario() {
+
+			let id = $("#id").val();
+			let name = $("#name").val();
+			let email = $("#email").val();
+			
+			if (name == null || name.trim() == '') {
+				alert("O campo Nome é obrigatório!");
+				$("#name").focus();
+				return;
+			}
+			
+			if (email == null || email.trim() == '') {
+				alert("O campo Email é obrigatório!");
+				$("#email").focus();
+				return;
+			}
+			
+			//console.log(id, name, email);
+
+			$.ajax({
+				method : "POST",
+				url : "/spring-course/user/save",
+				data : JSON.stringify({
+					id : id,
+					name : name,
+					email : email
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(response) {
+					$("id").val(response.id);
+					alert("Usuário salvo com sucesso!");
+					limparCampos();
+				}
+			}).fail(function(xhr, status, errorThrow) {
+				console.log("Erro ao salvar o usuário: " + xhr.responseText);
+				console.log(status, errorThrow);
+			});
+		}
+
+		function limparCampos() {
+			$("#formUser").each(function() {
+				this.reset();
+			});
+		}
+
+		function pesquisarUsuarioNome() {
+			let nome = $("#nome").val();
+
+			if (nome != null && nome.trim() && nome != '') {
+				$
+						.ajax(
+								{
+									method : "GET",
+									url : "/spring-course/user/findUserByName",
+									data : "name=" + nome,
+									contentType : "application/json; charset=utf-8",
+									success : function(response) {
+										$("#tabelaNome > tbody > tr").remove();
+
+										for (let i = 0; i < response.length; i++) {
+											$("#tabelaNome > tbody")
+													.append(
+															"<tr id="+response[i].id+"><td>"
+																	+ response[i].id
+																	+ "</td><td> "
+																	+ response[i].name
+																	+ " </td><td> "
+																	+ response[i].email
+																	+ " </td><td><button type='button' class='btn btn-dark' onclick='edicao("
+																	+ response[i].id
+																	+ ")'>Exibir</button></td><td><button type='button' class='btn btn-danger' onclick='apagar("
+																	+ response[i].id
+																	+ ")'>Apagar</button></td></tr>");
+										}
+									}
+								}).fail(function(xhr, status, errorThrow) {
+							console.log(xhr.responseText);
+							console.log(status);
+						});
+			}
+
+		}
+
+		function pesquisarUsuarioEmail() {
+			let email = $("#emailuser").val();
+
+			console.log(email);
+
+			if (email != null && email.trim() && email != '') {
+				$
+						.ajax(
+								{
+									method : "GET",
+									url : "/spring-course/user/findUserByEmail",
+									data : "email=" + email,
+									contentType : "application/json; charset=utf-8",
+									success : function(response) {
+										$("#tabelaEmail > tbody > tr").remove();
+										console.log(email);
+
+										for (let i = 0; i < response.length; i++) {
+											$("#tabelaEmail > tbody")
+													.append(
+															"<tr id="+response[i].id+"><td>"
+																	+ response[i].id
+																	+ "</td><td> "
+																	+ response[i].name
+																	+ " </td><td> "
+																	+ response[i].email
+																	+ " </td><td><button type='button' class='btn btn-dark' onclick='edicao("
+																	+ response[i].id
+																	+ ")'>Exibir</button></td><td><button type='button' class='btn btn-danger' onclick='apagar("
+																	+ response[i].id
+																	+ ")'>Apagar</button></td></tr>");
+										}
+									}
+								}).fail(function(xhr, status, errorThrow) {
+							console.log(xhr.responseText);
+							console.log(status);
+						});
+
+			}
+
+		}
+
+		function edicao(id) {
+			$.ajax({
+				method : "GET",
+				url : "/spring-course/user/findUserById",
+				data : "id=" + id,
+				contentType : "application/json; charset=utf-8",
+				success : function(response) {
+					$("#id").val(response.id);
+					$("#name").val(response.name);
+					$("#email").val(response.email);
+
+					$("#exampleModal2").modal("hide");
+					$("#exampleModal").modal("hide");
+
+				}
+			}).fail(function(xhr, status, errorThrow) {
+				console.log(xhr.responseText);
+				console.log(status);
+			});
+		}
+
+		function apagar(id) {
+
+			console.log(id);
+
+			if (confirm("Deseja realmente apagar?")) {
+				$.ajax({
+					method : "DELETE",
+					url : "/spring-course/user/delete/" + id,
+					success : function(response) {
+						$("#" + id).remove();
+						alert("Usuário apagado com successo!");
+					}
+				}).fail(function(xhr, status, errorThrow) {
+					console.log(xhr.responseText);
+					console.log(status);
+				});
+			}
+
+		}
+
+		function apagarUsuarioInicio() {
+
+			let id = $("#id").val();
+			
+			if(id != null && id.trim() != ''){
+				apagar(id);
+				limparCampos();				
+			}
+
+		}
+	</script>
+</body>
+</html>
